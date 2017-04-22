@@ -1,23 +1,26 @@
-var express = require("express");
+// # SimpleServer
+// A simple chat bot server
+var http = require('http');
+var bodyParser = require('body-parser');
+var express = require('express');
+var request = require('request');
+var router = express();
+
 var app = express();
-app.listen();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+var server = http.createServer(app);
 
-app.get("/",function(req,res){
-	
-            res.json({status: 1});
+
+app.get('/', (req, res) => {
+  res.send("Home page. Server running okay.");
 });
 
-app.post("/test",function(req,res){
-	res.setHeader('Access-Control-Allow-Origin', 'mhthang.github.io');
-	// Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3002);
+app.set('ip', process.env.OPENSHIFT_NODEJS_IP || process.env.IP || "127.0.0.1");
 
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
-            res.json({status: 1});
+server.listen(app.get('port'), app.get('ip'), function() {
+  console.log("Chat bot server listening at %s:%d ", app.get('ip'), app.get('port'));
 });
-
