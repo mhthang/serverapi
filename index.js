@@ -1,6 +1,6 @@
 var express = require("express");
 var app = express();
-app.listen(3201);
+app.listen();
 
 app.get("/",function(req,res){
 	
