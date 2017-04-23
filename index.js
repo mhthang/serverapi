@@ -14,3 +14,6 @@ app.listen(process.env.PORT || 3000);
 app.get('/', (req, res) => {
   res.send("Home page. Server running okay.");
 });
+app.post('/post',(req,res)=>{
+	res.json(status:"ok");;
+});
