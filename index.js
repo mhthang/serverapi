@@ -15,5 +15,10 @@ app.get('/', (req, res) => {
   res.send("Home page. Server running okay.");
 });
 app.post('/post',(req,res)=>{
-	res.json(status:"ok");;
+	res.setHeader('Access-Control-Allow-Origin', 'http://mhthang.github.io');
+	res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  	res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  	res.header('Access-Control-Allow-Credentials', true);
+	res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({ a: 1 }));
 });
