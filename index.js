@@ -3,6 +3,15 @@
 var http = require('http');
 var bodyParser = require('body-parser');
 var express = require('express');
+var admin = require('firebase-admin');
+
+var serviceAccount = require('./serviceAccountKey.json');
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: 'https://cpo2018-f4120.firebaseio.com/'
+});
+
 var app = express();
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
